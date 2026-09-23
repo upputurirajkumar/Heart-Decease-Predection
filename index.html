@@ -1,19 +1,1095 @@
 <!doctype html>
-<html lang="en">
+<html lang="en" data-theme="dark">
   <head>
     <meta charset="UTF-8" />
-    <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='%23ef4444'><path d='M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z'/></svg>" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>CardioPredict AI - Heart Disease ML Diagnostic System</title>
-    <meta name="description" content="Interactive cardiovascular disease risk prediction system powered by trained machine learning classification algorithms (Random Forest, Extra Trees, Gradient Boosting, Logistic Regression, SVM, KNN, Decision Tree) with patient screening, feature importance analysis, EDA metrics, and clinical guidance." />
-    <meta property="og:title" content="CardioPredict AI - Heart Disease ML Diagnostic System" />
-    <meta property="og:description" content="Interactive cardiovascular disease risk prediction system powered by trained machine learning classification algorithms (Random Forest, Extra Trees, Gradient Boosting, Logistic Regression, SVM, KNN, Decision Tree) with patient screening, feature importance analysis, EDA metrics, and clinical guidance." />
+    <title>HEARTINTEL - AI-Powered Cardiac Risk Intelligence</title>
+    <meta name="description" content="Portfolio-grade healthcare machine learning web platform exploring patient clinical data, exploratory data analysis, and 7 ML classification algorithms for earlier cardiac risk screening." />
+    <meta property="og:title" content="HEARTINTEL - AI-Powered Cardiac Risk Intelligence" />
+    <meta property="og:description" content="Explore how patient clinical data, exploratory data analysis, and machine learning can support cardiac risk stratification and assist decision support." />
+    
+    <!-- Google Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600;700;800&family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    
+    <!-- Design System Stylesheet -->
+    <link rel="stylesheet" href="/style.css" />
   </head>
-  <body class="bg-slate-900 text-slate-100 font-sans antialiased min-h-screen selection:bg-rose-500/30 selection:text-rose-200">
-    <div id="root"></div>
-    <script type="module" src="/src/main.tsx"></script>
+  <body>
+    <!-- ==========================================================================
+         Header & Global Navigation
+         ========================================================================== -->
+    <header class="header">
+      <div class="container header-container">
+        <!-- Brand Identity -->
+        <a href="#overview" class="logo-group" aria-label="HEARTINTEL Home">
+          <div class="logo-mark">
+            <div class="logo-pulse-ring"></div>
+            <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M19 14c1.49-1.46 3-3.21 3-5.5A5.5 5.5 0 0 0 16.5 3c-1.76 0-3 .5-4.5 2-1.5-1.5-2.74-2-4.5-2A5.5 5.5 0 0 0 2 8.5c0 2.3 1.5 4.05 3 5.5l7 7Z"/>
+            </svg>
+          </div>
+          <div class="logo-text">
+            <div class="brand-name">
+              HEARTINTEL
+              <span class="brand-badge">ML SYSTEM</span>
+            </div>
+            <span class="brand-subtitle">AI-Powered Cardiac Risk Intelligence</span>
+          </div>
+        </a>
+
+        <!-- Desktop Navigation Links -->
+        <nav aria-label="Main Navigation">
+          <ul class="nav-menu" id="nav-menu">
+            <li><a href="#overview" class="nav-link active">Overview</a></li>
+            <li><a href="#screen-patient" class="nav-link">Screen Patient</a></li>
+            <li><a href="#patient-intelligence" class="nav-link">Patient Intelligence</a></li>
+            <li><a href="#model-intelligence" class="nav-link">Models</a></li>
+            <li><a href="#model-evaluation" class="nav-link">Evaluation</a></li>
+            <li><a href="#data-explorer" class="nav-link">Data Explorer</a></li>
+            <li><a href="#methodology" class="nav-link">Methodology</a></li>
+          </ul>
+        </nav>
+
+        <!-- Header Actions -->
+        <div class="header-actions">
+          <!-- Theme Toggle Button -->
+          <button type="button" class="theme-toggle-btn" id="theme-toggle-btn" aria-label="Toggle Clinical Theme">
+            <svg id="theme-sun-icon" xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <circle cx="12" cy="12" r="4"/><path d="M12 2v2"/><path d="M12 20v2"/><path d="m4.93 4.93 1.41 1.41"/><path d="m17.66 17.66 1.41 1.41"/><path d="M2 12h2"/><path d="M20 12h2"/><path d="m6.34 17.66-1.41 1.41"/><path d="m19.07 4.93-1.41 1.41"/>
+            </svg>
+            <svg id="theme-moon-icon" style="display:none;" xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M12 3a6 6 0 0 0 9 9 9 9 0 1 1-9-9Z"/>
+            </svg>
+          </button>
+
+          <!-- Mobile Nav Toggle Button -->
+          <button type="button" class="mobile-nav-toggle" id="mobile-nav-toggle" aria-label="Toggle navigation menu" aria-expanded="false">
+            <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <line x1="3" y1="12" x2="21" y2="12"></line>
+              <line x1="3" y1="6" x2="21" y2="6"></line>
+              <line x1="3" y1="18" x2="21" y2="18"></line>
+            </svg>
+          </button>
+
+          <!-- Primary CTA Button -->
+          <a href="#screen-patient" class="btn-primary hero-cta-btn">
+            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M22 12h-4l-3 9L9 3l-3 9H2"/>
+            </svg>
+            <span>Run Screening</span>
+          </a>
+        </div>
+      </div>
+    </header>
+
+    <!-- Mobile Navigation Drawer -->
+    <div class="mobile-nav-drawer" id="mobile-nav-drawer" aria-hidden="true">
+      <div class="mobile-nav-backdrop" id="mobile-nav-backdrop"></div>
+      <div class="mobile-nav-content">
+        <div class="mobile-nav-header">
+          <div class="brand-name" style="font-size:1.05rem;">
+            HEARTINTEL
+            <span class="brand-badge">ML</span>
+          </div>
+          <button type="button" class="modal-close-btn" id="mobile-nav-close" aria-label="Close navigation menu">
+            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <line x1="18" y1="6" x2="6" y2="18"></line>
+              <line x1="6" y1="6" x2="18" y2="18"></line>
+            </svg>
+          </button>
+        </div>
+        <ul class="mobile-nav-links">
+          <li><a href="#overview" class="mobile-nav-link">Overview</a></li>
+          <li><a href="#screen-patient" class="mobile-nav-link">Screen Patient</a></li>
+          <li><a href="#patient-intelligence" class="mobile-nav-link">Patient Intelligence</a></li>
+          <li><a href="#model-intelligence" class="mobile-nav-link">Models</a></li>
+          <li><a href="#model-evaluation" class="mobile-nav-link">Evaluation</a></li>
+          <li><a href="#data-explorer" class="mobile-nav-link">Data Explorer</a></li>
+          <li><a href="#hospital-insights" class="mobile-nav-link">Hospital Insights</a></li>
+          <li><a href="#methodology" class="mobile-nav-link">Methodology</a></li>
+          <li><a href="#ethical-guardrails" class="mobile-nav-link">Ethics &amp; Guardrails</a></li>
+        </ul>
+        <div style="padding: 16px 20px;">
+          <a href="#screen-patient" class="btn-primary" style="width: 100%; justify-content: center;" id="mobile-screen-cta">
+            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M22 12h-4l-3 9L9 3l-3 9H2"/>
+            </svg>
+            <span>Run Screening</span>
+          </a>
+        </div>
+      </div>
+    </div>
+
+    <main id="main-content">
+      <!-- ==========================================================================
+           1. Hero Section: Overview & Live Oscilloscope
+           ========================================================================== -->
+      <section class="section hero-section" id="overview">
+        <div class="hero-glow-blob hero-glow-1"></div>
+        <div class="hero-glow-blob hero-glow-2"></div>
+        
+        <div class="container">
+          <div class="hero-grid">
+            <!-- Left Column: Copy & Actions -->
+            <div class="hero-content">
+              <div class="hero-badge">
+                <span class="pulse-dot"></span>
+                <span>Cleveland Clinic Dataset (PRCP-1016)</span>
+              </div>
+              
+              <h1 class="hero-headline">
+                Machine Learning for <br />
+                <span class="text-gradient">Earlier Cardiac Risk</span> Screening
+              </h1>
+              
+              <p class="hero-copy">
+                Explore how patient clinical data, exploratory data analysis, and machine learning can support cardiac risk stratification and assist decision support.
+              </p>
+              
+              <div class="hero-actions">
+                <a href="#screen-patient" class="btn-primary">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M19 14c1.49-1.46 3-3.21 3-5.5A5.5 5.5 0 0 0 16.5 3c-1.76 0-3 .5-4.5 2-1.5-1.5-2.74-2-4.5-2A5.5 5.5 0 0 0 2 8.5c0 2.3 1.5 4.05 3 5.5l7 7Z"/>
+                  </svg>
+                  <span>Run Patient Screening</span>
+                </a>
+                
+                <a href="#model-intelligence" class="btn-secondary">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <circle cx="12" cy="12" r="10"/>
+                    <line x1="12" x2="12" y1="16" y2="12"/>
+                    <line x1="12" x2="12.01" y1="8" y2="8"/>
+                  </svg>
+                  <span>Explore Model Intelligence</span>
+                </a>
+              </div>
+
+              <!-- Scientific Trust Indicators -->
+              <div class="hero-trust-bar">
+                <div class="trust-item">
+                  <svg class="trust-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                    <polyline points="20 6 9 17 4 12"/>
+                  </svg>
+                  <span>13 Verified Biomarkers</span>
+                </div>
+                <div class="trust-item">
+                  <svg class="trust-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                    <polyline points="20 6 9 17 4 12"/>
+                  </svg>
+                  <span>7 ML Classifiers</span>
+                </div>
+                <div class="trust-item">
+                  <svg class="trust-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                    <polyline points="20 6 9 17 4 12"/>
+                  </svg>
+                  <span>5-Fold Stratified CV</span>
+                </div>
+              </div>
+            </div>
+
+            <!-- Right Column: Interactive Cardiac Intelligence Visual Card -->
+            <div class="hero-visual-card">
+              <div class="hero-visual-header">
+                <div class="visual-title-group">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#0ea5e9" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M22 12h-4l-3 9L9 3l-3 9H2"/>
+                  </svg>
+                  <strong style="font-size: 0.85rem; font-weight: 700;">LIVE CARDIAC CYCLE TELEMETRY</strong>
+                </div>
+                <span class="visual-badge">CONTINUOUS LEAD II</span>
+              </div>
+
+              <!-- Animated Oscilloscope Waveform Canvas -->
+              <div class="ecg-scope-container">
+                <div class="ecg-grid-overlay"></div>
+                <canvas id="ecg-canvas" class="ecg-canvas"></canvas>
+                <div class="ecg-meta">
+                  <span>SWEEP: 25 mm/s</span>
+                  <span>GAIN: 10 mm/mV</span>
+                  <span id="ecg-hr-display">HR: 72 BPM</span>
+                </div>
+              </div>
+
+              <!-- Central Cardiac System Diagram & Pipeline Nodes -->
+              <div class="cardiac-system-diagram" id="hero-cardiac-system">
+                <!-- Rhythmic Pulsing Heart with Functional State -->
+                <div class="heart-pulse-node state-idle" id="hero-heart-node" title="Cardiac Cycle State Indicator">
+                  <div class="heart-pulse-circle"></div>
+                  <div class="heart-pulse-circle"></div>
+                  <div class="heart-core">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="currentColor">
+                      <path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/>
+                    </svg>
+                  </div>
+                </div>
+
+                <!-- 4 Pipeline Stages Grid -->
+                <div class="system-nodes-grid" id="hero-flow-nodes">
+                  <div class="flow-node-item active" data-step="1">
+                    <div class="node-label">01 // PATIENT DATA</div>
+                    <div class="node-value">
+                      <span>180 Records</span>
+                      <span class="visual-badge" style="font-size:0.65rem;">MERGED</span>
+                    </div>
+                  </div>
+                  <div class="flow-node-item" data-step="2">
+                    <div class="node-label">02 // CLINICAL FEATURES</div>
+                    <div class="node-value">
+                      <span>13 Biomarkers</span>
+                    </div>
+                  </div>
+                  <div class="flow-node-item" data-step="3">
+                    <div class="node-label">03 // ML ENGINE</div>
+                    <div class="node-value">
+                      <span>7 Classifiers</span>
+                    </div>
+                  </div>
+                  <div class="flow-node-item" data-step="4" id="telemetry-risk-node">
+                    <div class="node-label">04 // RISK STRATIFICATION</div>
+                    <div class="node-value" id="node-risk-value" style="color:var(--text-secondary);">
+                      <span>Awaiting Analysis</span>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ==========================================================================
+           Metrics Counter Section
+           ========================================================================== -->
+      <section class="metrics-section">
+        <div class="container">
+          <div class="metrics-grid">
+            <div class="metric-card">
+              <div class="metric-icon-wrap">
+                <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                  <path d="M19 21v-2a4 4 0 0 0-4-4H9a4 4 0 0 0-4 4v2"/>
+                  <circle cx="12" cy="7" r="4"/>
+                </svg>
+              </div>
+              <div class="metric-number" data-target="180">0</div>
+              <div class="metric-label">Patient Records</div>
+              <div class="metric-desc">Cleveland Clinic holdout & training cohorts merged from values & labels.</div>
+            </div>
+
+            <div class="metric-card">
+              <div class="metric-icon-wrap">
+                <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                  <line x1="4" x2="4" y1="21" y2="14"/><line x1="4" x2="4" y1="10" y2="3"/>
+                  <line x1="12" x2="12" y1="21" y2="12"/><line x1="12" x2="12" y1="8" y2="3"/>
+                  <line x1="20" x2="20" y1="21" y2="16"/><line x1="20" x2="20" y1="12" y2="3"/>
+                </svg>
+              </div>
+              <div class="metric-number" data-target="13">0</div>
+              <div class="metric-label">Clinical Biomarkers</div>
+              <div class="metric-desc">Hemodynamics, ECG, nuclear scintigraphy, and fluoroscopy parameters.</div>
+            </div>
+
+            <div class="metric-card">
+              <div class="metric-icon-wrap">
+                <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                  <path d="M12 2a7 7 0 0 0-7 7c0 2.5 1.5 4.5 3 6v3a2 2 0 0 0 2 2h4a2 2 0 0 0 2-2v-3c1.5-1.5 3-3.5 3-6a7 7 0 0 0-7-7Z"/>
+                </svg>
+              </div>
+              <div class="metric-number" data-target="7">0</div>
+              <div class="metric-label">ML Classifiers</div>
+              <div class="metric-desc">Linear baseline, tree ensembles, SVM kernels, and distance metric models.</div>
+            </div>
+
+            <div class="metric-card">
+              <div class="metric-icon-wrap">
+                <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                  <path d="M20 13c0 5-3.5 7.5-7.66 8.95a1 1 0 0 1-.67-.01C7.5 20.5 4 18 4 13V6a1 1 0 0 1 1-1c2 0 4.5-1.2 6.24-2.72a1.17 1.17 0 0 1 1.52 0C14.51 3.81 17 5 19 5a1 1 0 0 1 1 1z"/>
+                  <path d="m9 12 2 2 4-4"/>
+                </svg>
+              </div>
+              <div class="metric-number" data-target="5">0</div>
+              <div class="metric-label">Stratified Folds</div>
+              <div class="metric-desc">Rigorous 5-fold cross-validation preventing data leakage across iterations.</div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ==========================================================================
+           2. Screen Patient (Interactive Form Console)
+           ========================================================================== -->
+      <section class="section section-alt" id="screen-patient">
+        <div class="container">
+          <div class="section-header">
+            <span class="section-tag">Patient Screening Console</span>
+            <h2 class="section-title">Clinical Biomarker Entry &amp; Screening</h2>
+            <p class="section-subtitle">
+              Input patient clinical measurements across the 4 diagnostic categories from the Cleveland Clinic dataset to run the multi-algorithm risk assessment.
+            </p>
+          </div>
+
+          <div class="screening-form-card" style="max-width:960px; margin:0 auto;">
+            <!-- Top Controls: Patient ID & Archetype Presets -->
+            <div style="display:flex; justify-content:space-between; align-items:flex-end; flex-wrap:wrap; gap:16px; margin-bottom:24px; padding-bottom:16px; border-bottom:1px solid var(--border-subtle);">
+              <div style="flex:1; min-width:240px;">
+                <label for="input-patient-id" class="input-label" style="display:block; margin-bottom:6px;">
+                  Patient Identifier (Unique Key)
+                </label>
+                <input type="text" id="input-patient-id" value="PT-0Z64UN" class="clinical-select" style="width:100%; font-family:var(--font-mono); text-transform:uppercase;" placeholder="e.g. PT-0Z64UN" />
+              </div>
+
+              <div>
+                <div class="preset-title" style="margin-bottom:6px;">Load Cleveland Holdout Archetypes:</div>
+                <div class="preset-buttons">
+                  <button type="button" class="preset-chip active" data-preset="case-high">
+                    #0z64un (High Risk)
+                  </button>
+                  <button type="button" class="preset-chip" data-preset="case-low">
+                    #yt1s1x (Low Risk)
+                  </button>
+                  <button type="button" class="preset-chip" data-preset="case-borderline">
+                    #oyt4ek (Borderline)
+                  </button>
+                </div>
+              </div>
+            </div>
+
+            <!-- SECTION 1: Patient Demographics -->
+            <fieldset class="form-fieldset">
+              <legend class="fieldset-legend">
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                  <path d="M19 21v-2a4 4 0 0 0-4-4H9a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/>
+                </svg>
+                <span>1. Patient Demographics</span>
+              </legend>
+
+              <div class="input-row">
+                <!-- Age -->
+                <div class="input-group">
+                  <div class="input-label-row">
+                    <label for="input-age" class="input-label">Patient Age (years)</label>
+                    <div style="display:flex; align-items:center; gap:6px;">
+                      <input type="number" id="num-age" class="input-num-field" min="20" max="95" value="67" />
+                      <span class="input-val-badge" id="badge-age">67 yrs</span>
+                    </div>
+                  </div>
+                  <input type="range" id="input-age" min="20" max="95" value="67" step="1" />
+                  <div style="display:flex; justify-content:space-between; font-size:0.68rem; color:var(--text-muted); margin-top:4px;">
+                    <span>Min: 20 yrs</span>
+                    <span>Dataset Mean: 54.8 yrs</span>
+                    <span>Max: 95 yrs</span>
+                  </div>
+                </div>
+
+                <!-- Biological Sex -->
+                <div class="input-group">
+                  <div class="input-label-row">
+                    <span class="input-label">Biological Sex</span>
+                    <span class="input-val-badge">0 = Female, 1 = Male</span>
+                  </div>
+                  <div class="button-toggle-group" id="group-sex">
+                    <button type="button" class="toggle-option-btn active" data-val="1">Male (69% Cohort)</button>
+                    <button type="button" class="toggle-option-btn" data-val="0">Female (31% Cohort)</button>
+                  </div>
+                </div>
+              </div>
+            </fieldset>
+
+            <!-- SECTION 2: Clinical Measurements -->
+            <fieldset class="form-fieldset">
+              <legend class="fieldset-legend">
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                  <path d="M22 12h-4l-3 9L9 3l-3 9H2"/>
+                </svg>
+                <span>2. Clinical Measurements</span>
+              </legend>
+
+              <div class="input-row">
+                <!-- Resting Blood Pressure -->
+                <div class="input-group">
+                  <div class="input-label-row">
+                    <label for="input-bp" class="input-label">Resting Blood Pressure (mmHg)</label>
+                    <div style="display:flex; align-items:center; gap:6px;">
+                      <input type="number" id="num-bp" class="input-num-field" min="70" max="240" value="160" />
+                      <span class="input-val-badge" id="badge-bp">160 mmHg</span>
+                    </div>
+                  </div>
+                  <input type="range" id="input-bp" min="70" max="240" value="160" step="1" />
+                  <div style="display:flex; justify-content:space-between; font-size:0.68rem; color:var(--text-muted); margin-top:4px;">
+                    <span>Min: 70</span>
+                    <span>Dataset Mean: 131.3 mmHg</span>
+                    <span>Max: 240</span>
+                  </div>
+                </div>
+
+                <!-- Serum Cholesterol -->
+                <div class="input-group">
+                  <div class="input-label-row">
+                    <label for="input-chol" class="input-label">Serum Cholesterol (mg/dL)</label>
+                    <div style="display:flex; align-items:center; gap:6px;">
+                      <input type="number" id="num-chol" class="input-num-field" min="100" max="600" value="286" />
+                      <span class="input-val-badge" id="badge-chol">286 mg/dL</span>
+                    </div>
+                  </div>
+                  <input type="range" id="input-chol" min="100" max="600" value="286" step="1" />
+                  <div style="display:flex; justify-content:space-between; font-size:0.68rem; color:var(--text-muted); margin-top:4px;">
+                    <span>Min: 100</span>
+                    <span>Dataset Mean: 249.2 mg/dL</span>
+                    <span>Max: 600</span>
+                  </div>
+                </div>
+              </div>
+
+              <div class="input-row">
+                <!-- Fasting Blood Sugar > 120 -->
+                <div class="input-group">
+                  <div class="input-label-row">
+                    <span class="input-label">Fasting Blood Sugar > 120 mg/dL</span>
+                  </div>
+                  <div class="button-toggle-group" id="group-fbs">
+                    <button type="button" class="toggle-option-btn active" data-val="0">False (&le; 120 mg/dL)</button>
+                    <button type="button" class="toggle-option-btn" data-val="1">True (&gt; 120 mg/dL)</button>
+                  </div>
+                </div>
+
+                <!-- Resting EKG Results -->
+                <div class="input-group">
+                  <div class="input-label-row">
+                    <span class="input-label">Resting EKG Findings</span>
+                  </div>
+                  <div class="button-toggle-group" id="group-ekg">
+                    <button type="button" class="toggle-option-btn" data-val="0">0: Normal</button>
+                    <button type="button" class="toggle-option-btn" data-val="1">1: ST-T Wave</button>
+                    <button type="button" class="toggle-option-btn active" data-val="2">2: LVH Definite</button>
+                  </div>
+                </div>
+              </div>
+            </fieldset>
+
+            <!-- SECTION 3: Exercise / Diagnostic Indicators -->
+            <fieldset class="form-fieldset">
+              <legend class="fieldset-legend">
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                  <polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/>
+                </svg>
+                <span>3. Exercise / Diagnostic Indicators</span>
+              </legend>
+
+              <div class="input-row">
+                <!-- Chest Pain Type -->
+                <div class="input-group" style="grid-column: span 2;">
+                  <div class="input-label-row">
+                    <span class="input-label">Chest Pain Presentation (Angina Tier)</span>
+                    <span class="input-val-badge">Gini Rank #2</span>
+                  </div>
+                  <div class="button-toggle-group" id="group-cp">
+                    <button type="button" class="toggle-option-btn" data-val="1">1: Typical Angina</button>
+                    <button type="button" class="toggle-option-btn" data-val="2">2: Atypical Angina</button>
+                    <button type="button" class="toggle-option-btn" data-val="3">3: Non-Anginal</button>
+                    <button type="button" class="toggle-option-btn active" data-val="4">4: Asymptomatic (Silent)</button>
+                  </div>
+                </div>
+              </div>
+
+              <div class="input-row">
+                <!-- Max Heart Rate -->
+                <div class="input-group">
+                  <div class="input-label-row">
+                    <label for="input-maxhr" class="input-label">Maximum Heart Rate Achieved (bpm)</label>
+                    <div style="display:flex; align-items:center; gap:6px;">
+                      <input type="number" id="num-maxhr" class="input-num-field" min="60" max="230" value="108" />
+                      <span class="input-val-badge" id="badge-maxhr">108 bpm</span>
+                    </div>
+                  </div>
+                  <input type="range" id="input-maxhr" min="60" max="230" value="108" step="1" />
+                  <div style="display:flex; justify-content:space-between; font-size:0.68rem; color:var(--text-muted); margin-top:4px;">
+                    <span>Min: 60</span>
+                    <span>Dataset Mean: 149.5 bpm</span>
+                    <span>Max: 230</span>
+                  </div>
+                </div>
+
+                <!-- ST Depression (Oldpeak) -->
+                <div class="input-group">
+                  <div class="input-label-row">
+                    <label for="input-oldpeak" class="input-label">Exercise ST Depression - Oldpeak (mm)</label>
+                    <div style="display:flex; align-items:center; gap:6px;">
+                      <input type="number" id="num-oldpeak" class="input-num-field" min="0" max="7" step="0.1" value="2.6" />
+                      <span class="input-val-badge" id="badge-oldpeak">2.6 mm</span>
+                    </div>
+                  </div>
+                  <input type="range" id="input-oldpeak" min="0.0" max="7.0" value="2.6" step="0.1" />
+                  <div style="display:flex; justify-content:space-between; font-size:0.68rem; color:var(--text-muted); margin-top:4px;">
+                    <span>0.0 mm</span>
+                    <span>Dataset Mean: 1.01 mm</span>
+                    <span>7.0 mm</span>
+                  </div>
+                </div>
+              </div>
+
+              <div class="input-row">
+                <!-- Exercise-Induced Angina -->
+                <div class="input-group">
+                  <div class="input-label-row">
+                    <span class="input-label">Exercise-Induced Angina</span>
+                  </div>
+                  <div class="button-toggle-group" id="group-angina">
+                    <button type="button" class="toggle-option-btn" data-val="0">No (67.8% Cohort)</button>
+                    <button type="button" class="toggle-option-btn active" data-val="1">Yes (32.2% Cohort)</button>
+                  </div>
+                </div>
+
+                <!-- Slope of Peak Exercise ST -->
+                <div class="input-group">
+                  <div class="input-label-row">
+                    <span class="input-label">Slope of Peak Exercise ST</span>
+                  </div>
+                  <div class="button-toggle-group" id="group-slope">
+                    <button type="button" class="toggle-option-btn" data-val="1">1: Upsloping</button>
+                    <button type="button" class="toggle-option-btn active" data-val="2">2: Flat</button>
+                    <button type="button" class="toggle-option-btn" data-val="3">3: Downsloping</button>
+                  </div>
+                </div>
+              </div>
+            </fieldset>
+
+            <!-- SECTION 4: Other Clinical Variables -->
+            <fieldset class="form-fieldset">
+              <legend class="fieldset-legend">
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                  <circle cx="12" cy="12" r="10"/>
+                  <circle cx="12" cy="12" r="6"/>
+                  <circle cx="12" cy="12" r="2"/>
+                </svg>
+                <span>4. Fluoroscopy &amp; Thallium Scintigraphy</span>
+              </legend>
+
+              <div class="input-row">
+                <!-- Major Vessels Colored -->
+                <div class="input-group">
+                  <div class="input-label-row">
+                    <span class="input-label">Major Vessels Colored (Fluoroscopy)</span>
+                    <span class="input-val-badge">0 to 3</span>
+                  </div>
+                  <div class="button-toggle-group" id="group-vessels">
+                    <button type="button" class="toggle-option-btn" data-val="0">0 Vessels</button>
+                    <button type="button" class="toggle-option-btn" data-val="1">1 Vessel</button>
+                    <button type="button" class="toggle-option-btn" data-val="2">2 Vessels</button>
+                    <button type="button" class="toggle-option-btn active" data-val="3">3 Vessels</button>
+                  </div>
+                </div>
+
+                <!-- Thallium Scintigraphy -->
+                <div class="input-group">
+                  <div class="input-label-row">
+                    <span class="input-label">Thallium Stress Scintigraphy</span>
+                    <span class="input-val-badge" style="color:var(--accent-rose);">Rank #1 (13.5% Gini)</span>
+                  </div>
+                  <div class="button-toggle-group" id="group-thal">
+                    <button type="button" class="toggle-option-btn" data-val="normal">Normal Perfusion</button>
+                    <button type="button" class="toggle-option-btn active" data-val="reversible_defect">Reversible Defect</button>
+                    <button type="button" class="toggle-option-btn" data-val="fixed_defect">Fixed Defect</button>
+                  </div>
+                </div>
+              </div>
+            </fieldset>
+
+            <!-- Form Actions Bar: ANALYZE & RESET -->
+            <div class="form-actions-bar">
+              <button type="button" class="btn-primary" id="btn-analyze-patient" style="flex:1; justify-content:center; padding:14px 28px; font-size:1rem;">
+                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+                  <path d="M22 12h-4l-3 9L9 3l-3 9H2"/>
+                </svg>
+                <span>ANALYZE PATIENT</span>
+              </button>
+
+              <button type="button" class="btn-secondary" id="btn-reset-screening" style="padding:14px 20px;">
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                  <path d="M3 12a9 9 0 1 0 9-9 9.75 9.75 0 0 0-6.74 2.74L3 8"/>
+                  <path d="M3 3v5h5"/>
+                </svg>
+                <span>RESET FORM</span>
+              </button>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ==========================================================================
+           3. Patient Intelligence (Dynamic Post-Analysis View)
+           ========================================================================== -->
+      <section class="section" id="patient-intelligence">
+        <div class="container">
+          <div class="section-header">
+            <span class="section-tag">Clinical Risk Intelligence</span>
+            <h2 class="section-title">Patient Diagnostic Assessment</h2>
+            <p class="section-subtitle">
+              Generated following multi-classifier consensus. Evaluates biomarker variances against the Cleveland Clinic benchmark cohort.
+            </p>
+          </div>
+
+          <!-- Dynamic Container Populated by patientIntelligence.js -->
+          <div id="patient-intelligence-content">
+            <!-- Rendered dynamically -->
+          </div>
+        </div>
+      </section>
+
+      <!-- ==========================================================================
+           4. Model Intelligence Section (7 Evaluated Classifiers & Comparison)
+           ========================================================================== -->
+      <section class="section section-alt" id="model-intelligence">
+        <div class="container">
+          <div class="section-header">
+            <span class="section-tag">Machine Learning Architectures</span>
+            <h2 class="section-title">7 Classification Algorithms</h2>
+            <p class="section-subtitle">
+              Evaluated on the Cleveland dataset using 80/20 train-test partitioning and 5-fold stratified cross-validation. Click any model to inspect architectural details.
+            </p>
+          </div>
+
+          <!-- Model Category Filter Tabs -->
+          <div class="model-filter-nav">
+            <button type="button" class="filter-btn active" data-filter="all">All Models (7)</button>
+            <button type="button" class="filter-btn" data-filter="ensemble">Ensemble Methods (3)</button>
+            <button type="button" class="filter-btn" data-filter="linear-kernel">Linear &amp; Kernels (2)</button>
+            <button type="button" class="filter-btn" data-filter="instance-tree">Instance &amp; Trees (2)</button>
+          </div>
+
+          <!-- Models Grid (Populated dynamically by modelIntelligence.js) -->
+          <div class="models-grid" id="models-grid-container">
+            <!-- Dynamic model cards -->
+          </div>
+
+          <!-- Interactive Model Comparison Subsection -->
+          <div style="margin-top:56px; background:var(--bg-card); backdrop-filter:var(--glass-blur); border:1px solid var(--border-medium); border-radius:var(--radius-xl); padding:32px;">
+            <div style="display:flex; justify-content:space-between; align-items:flex-end; flex-wrap:wrap; gap:16px; margin-bottom:20px;">
+              <div>
+                <span class="section-tag" style="margin-bottom:6px;">Interactive Benchmark</span>
+                <h3 style="font-size:1.35rem; font-weight:800; color:var(--text-primary);">
+                  Model Comparison Matrix
+                </h3>
+                <p id="compare-active-metric-name" style="font-size:0.85rem; color:var(--text-secondary); margin-top:2px;">
+                  Test Set Accuracy (36 Holdout Cases)
+                </p>
+              </div>
+
+              <!-- Metric switcher buttons -->
+              <div style="display:flex; gap:6px; flex-wrap:wrap;">
+                <button type="button" class="compare-metric-btn active" data-metric="accuracy">Accuracy</button>
+                <button type="button" class="compare-metric-btn" data-metric="recall">Recall</button>
+                <button type="button" class="compare-metric-btn" data-metric="precision">Precision</button>
+                <button type="button" class="compare-metric-btn" data-metric="f1Score">F1 Score</button>
+                <button type="button" class="compare-metric-btn" data-metric="rocAuc">ROC-AUC</button>
+                <button type="button" class="compare-metric-btn" data-metric="cvAccuracy">5-Fold CV</button>
+              </div>
+            </div>
+
+            <!-- Animated SVG Comparison Bar Chart -->
+            <div style="width:100%; overflow-x:auto; margin-bottom:28px;">
+              <svg id="model-comparison-chart-svg" style="width:100%; height:280px;"></svg>
+            </div>
+
+            <!-- Full Side-by-Side Comparison Table -->
+            <div style="overflow-x:auto;">
+              <table style="width:100%; border-collapse:collapse; font-size:0.82rem; text-align:left;">
+                <thead>
+                  <tr style="border-bottom:2px solid var(--border-medium); color:var(--text-muted); font-size:0.72rem; text-transform:uppercase;">
+                    <th style="padding:10px 14px;">Model Architecture</th>
+                    <th style="padding:10px 14px;">Test Accuracy</th>
+                    <th style="padding:10px 14px;">Precision</th>
+                    <th style="padding:10px 14px;">Recall</th>
+                    <th style="padding:10px 14px;">F1 Score</th>
+                    <th style="padding:10px 14px;">ROC-AUC</th>
+                    <th style="padding:10px 14px;">5-Fold CV</th>
+                  </tr>
+                </thead>
+                <tbody id="models-matrix-table-body">
+                  <!-- Injected dynamically -->
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ==========================================================================
+           5. Model Evaluation (Confusion Matrix, ROC Curve, Feature Importance)
+           ========================================================================== -->
+      <section class="section" id="model-evaluation">
+        <div class="container">
+          <div class="section-header">
+            <span class="section-tag">Diagnostic Verification</span>
+            <h2 class="section-title">Model Evaluation Suite</h2>
+            <p class="section-subtitle">
+              Inspect test set confusion matrices, classification reports, ROC curves, and Gini feature importances directly from the source notebook.
+            </p>
+          </div>
+
+          <div style="display:grid; grid-template-columns: repeat(auto-fit, minmax(340px, 1fr)); gap:24px; margin-bottom:32px;">
+            <!-- Left: Interactive Confusion Matrix & Classification Report -->
+            <div class="metric-card" style="padding:28px;">
+              <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:16px;">
+                <span class="section-tag" style="margin-bottom:0;">Confusion Matrix</span>
+                <select id="cm-model-select" class="clinical-select" style="font-size:0.78rem;">
+                  <!-- Dynamic options -->
+                </select>
+              </div>
+
+              <!-- 2x2 Matrix Display -->
+              <div id="confusion-matrix-display">
+                <!-- Injected dynamically -->
+              </div>
+
+              <!-- Classification Report Table -->
+              <div style="margin-top:20px; overflow-x:auto;">
+                <div style="font-size:0.75rem; font-weight:700; text-transform:uppercase; color:var(--text-muted); margin-bottom:8px;">
+                  Classification Report Breakdown
+                </div>
+                <table style="width:100%; border-collapse:collapse; font-size:0.78rem; text-align:left;">
+                  <thead>
+                    <tr style="border-bottom:1px solid var(--border-subtle); color:var(--text-muted); font-size:0.7rem;">
+                      <th style="padding:6px 12px;">Class</th>
+                      <th style="padding:6px 12px;">Precision</th>
+                      <th style="padding:6px 12px;">Recall</th>
+                      <th style="padding:6px 12px;">F1</th>
+                      <th style="padding:6px 12px;">Support</th>
+                    </tr>
+                  </thead>
+                  <tbody id="classification-report-body">
+                    <!-- Dynamic -->
+                  </tbody>
+                </table>
+              </div>
+            </div>
+
+            <!-- Right: Interactive 2D ROC Curve Canvas -->
+            <div class="metric-card" style="padding:28px;">
+              <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:12px;">
+                <span class="section-tag" style="margin-bottom:0;">Receiver Operating Characteristic</span>
+                <span class="visual-badge">ROC-AUC Comparison</span>
+              </div>
+              <p style="font-size:0.8rem; color:var(--text-secondary); margin-bottom:12px;">
+                True Positive Rate vs. False Positive Rate across classification thresholds on the 36 holdout cases.
+              </p>
+
+              <div style="position:relative; width:100%; border-radius:var(--radius-sm); overflow:hidden;">
+                <canvas id="roc-curve-canvas" style="width:100%; height:320px; display:block;"></canvas>
+              </div>
+
+              <!-- ROC Legend -->
+              <div style="display:flex; gap:12px; flex-wrap:wrap; font-size:0.72rem; margin-top:12px;">
+                <span style="color:#f59e0b; font-weight:700;">&bull; Random Forest (0.956)</span>
+                <span style="color:#8b5cf6; font-weight:700;">&bull; SVM (0.947)</span>
+                <span style="color:#0ea5e9; font-weight:700;">&bull; Gradient Boost (0.938)</span>
+                <span style="color:#06b6d4; font-weight:700;">&bull; Extra Trees (0.938)</span>
+                <span style="color:#10b981; font-weight:700;">&bull; KNN (0.922)</span>
+                <span style="color:#e2e8f0; font-weight:700;">&bull; LogReg (0.880)</span>
+                <span style="color:#f43f5e; font-weight:700;">&bull; DecTree (0.756)</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- Feature Importance Ranking (Gini Impurity from Notebook) -->
+          <div class="metric-card" style="padding:28px;">
+            <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:16px;">
+              <div>
+                <span class="section-tag" style="margin-bottom:4px;">Predictive Power Analysis</span>
+                <h3 style="font-size:1.2rem; font-weight:800; color:var(--text-primary);">
+                  Feature Importance Rankings (Gini Impurity)
+                </h3>
+              </div>
+              <span class="visual-badge" style="background:rgba(245,158,11,0.15); color:var(--accent-amber); border-color:rgba(245,158,11,0.3);">
+                Random Forest Source
+              </span>
+            </div>
+
+            <div id="feature-importance-list">
+              <!-- Rendered dynamically -->
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ==========================================================================
+           6. Data Explorer Section (Cleveland Cohort EDA)
+           ========================================================================== -->
+      <section class="section section-alt" id="data-explorer">
+        <div class="container">
+          <div class="section-header">
+            <span class="section-tag">Exploratory Data Analysis</span>
+            <h2 class="section-title">Cohort Explorer &amp; Distributions</h2>
+            <p class="section-subtitle">
+              Interactive exploration of the 180 patient records from the Cleveland Clinic heart disease dataset.
+            </p>
+          </div>
+
+          <!-- Dataset Metadata Summary Cards -->
+          <div class="data-summary-grid" id="dataset-intel-summary-cards" style="margin-bottom:28px;">
+            <!-- Populated dynamically -->
+          </div>
+
+          <div style="display:grid; grid-template-columns: repeat(auto-fit, minmax(340px, 1fr)); gap:24px;">
+            <!-- Left: Interactive Feature Distribution Explorer -->
+            <div class="metric-card" style="padding:28px;">
+              <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:14px; flex-wrap:wrap; gap:10px;">
+                <span class="section-tag" style="margin-bottom:0;">Feature Distribution</span>
+                <select id="eda-feature-select" class="clinical-select" style="font-size:0.8rem;">
+                  <!-- Options injected dynamically -->
+                </select>
+              </div>
+
+              <!-- Filter by Disease Status -->
+              <div style="display:flex; gap:6px; margin-bottom:12px;">
+                <button type="button" class="eda-filter-btn active" data-cat="all">All Patients (180)</button>
+                <button type="button" class="eda-filter-btn" data-cat="disease">Disease Present (80)</button>
+                <button type="button" class="eda-filter-btn" data-cat="noDisease">No Disease (100)</button>
+              </div>
+
+              <!-- Dynamic Distribution Chart Container -->
+              <div id="eda-distribution-chart">
+                <!-- Rendered dynamically -->
+              </div>
+
+              <!-- Feature Statistics Summary -->
+              <div id="eda-feature-stats">
+                <!-- Rendered dynamically -->
+              </div>
+            </div>
+
+            <!-- Right: Target Distribution & Correlation Ranking -->
+            <div class="metric-card" style="padding:28px;">
+              <div style="margin-bottom:24px;">
+                <span class="section-tag" style="margin-bottom:4px;">Target Balance</span>
+                <h3 style="font-size:1.15rem; font-weight:800; color:var(--text-primary); margin-bottom:6px;">
+                  heart_disease_present (180 Total Cases)
+                </h3>
+                <p style="font-size:0.8rem; color:var(--text-secondary); margin-bottom:12px;">
+                  100 Negative (55.6%) vs 80 Positive (44.4%). Balanced class distribution preventing severe algorithmic skew.
+                </p>
+
+                <div class="target-dist-wrap">
+                  <div class="target-dist-bar">
+                    <div class="target-dist-neg" style="width: 55.56%;">55.6% (100)</div>
+                    <div class="target-dist-pos" style="width: 44.44%;">44.4% (80)</div>
+                  </div>
+                  <div class="target-dist-legend">
+                    <span><strong>Class 0:</strong> Negative</span>
+                    <span><strong>Class 1:</strong> Heart Disease Present</span>
+                  </div>
+                </div>
+              </div>
+
+              <div style="border-top:1px solid var(--border-subtle); padding-top:20px;">
+                <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:12px;">
+                  <span class="section-tag" style="margin-bottom:0;">Pearson Correlation</span>
+                  <span style="font-size:0.72rem; color:var(--text-muted); font-family:var(--font-mono);">r with target</span>
+                </div>
+
+                <div id="full-correlation-list">
+                  <!-- Populated dynamically -->
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ==========================================================================
+           7. Hospital Insights Section (Notebook Step 13)
+           ========================================================================== -->
+      <section class="section" id="hospital-insights">
+        <div class="container">
+          <div class="section-header">
+            <span class="section-tag">Clinical Implementation</span>
+            <h2 class="section-title">Hospital Recommendations &amp; Insights</h2>
+            <p class="section-subtitle">
+              Translating data science findings into structured healthcare protocols. Grounded in the source notebook's hospital recommendations.
+            </p>
+          </div>
+
+          <!-- Dynamic Hospital Insights Container -->
+          <div id="hospital-insights-container">
+            <!-- Injected dynamically by hospitalInsights.js -->
+          </div>
+        </div>
+      </section>
+
+      <!-- ==========================================================================
+           8. Methodology Section (12-Step Pipeline)
+           ========================================================================== -->
+      <section class="section section-alt" id="methodology">
+        <div class="container">
+          <div class="section-header">
+            <span class="section-tag">Data Science Process</span>
+            <h2 class="section-title">End-to-End Methodology</h2>
+            <p class="section-subtitle">
+              Explore each phase of the machine learning lifecycle documented in the project notebook. Click any phase to inspect technical rationale.
+            </p>
+          </div>
+
+          <!-- Interactive Pipeline Stages Grid -->
+          <div class="methodology-timeline" id="methodology-pipeline-steps" style="grid-template-columns: repeat(auto-fill, minmax(220px, 1fr)); gap:14px; margin-bottom:24px;">
+            <!-- Populated dynamically by methodology.js -->
+          </div>
+
+          <!-- Active Phase Technical Detail Box -->
+          <div id="methodology-step-detail">
+            <!-- Populated dynamically by methodology.js -->
+          </div>
+        </div>
+      </section>
+
+      <!-- ==========================================================================
+           9. Ethical Guardrails & Governance
+           ========================================================================== -->
+      <section class="section" id="ethical-guardrails">
+        <div class="container">
+          <div class="section-header">
+            <span class="section-tag">Governance &amp; Responsibility</span>
+            <h2 class="section-title">Ethical AI Position &amp; Clinical Guardrails</h2>
+            <p class="section-subtitle">
+              Responsible healthcare machine learning guidelines ensuring transparency, patient safety, and bias awareness.
+            </p>
+          </div>
+
+          <!-- Ethical Content Container -->
+          <div id="ethical-section-content">
+            <!-- Injected dynamically by ethicalSection.js -->
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <!-- ==========================================================================
+         Analysis Workflow Telemetry Modal (5 Steps)
+         ========================================================================== -->
+    <div class="workflow-overlay-modal" id="analysis-overlay-modal" role="dialog" aria-modal="true" aria-labelledby="workflow-step-label">
+      <div class="workflow-modal-card">
+        <div class="workflow-pulse-icon">
+          <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M22 12h-4l-3 9L9 3l-3 9H2"/>
+          </svg>
+        </div>
+
+        <h3 id="workflow-step-label" style="font-family:var(--font-mono); font-size:1.05rem; font-weight:800; color:var(--accent-cyan); margin-bottom:8px;">
+          STEP 1 // VALIDATING PATIENT DATA
+        </h3>
+        
+        <p id="workflow-step-desc" style="font-size:0.85rem; color:var(--text-secondary); margin-bottom:20px;">
+          Verifying 13 biomarkers against Cleveland clinical ranges...
+        </p>
+
+        <!-- 5 Step Visual Pills -->
+        <div class="workflow-step-pill-row">
+          <div class="workflow-step-pill active" title="Step 1: Validation">1</div>
+          <div class="workflow-step-pill pending" title="Step 2: Processing">2</div>
+          <div class="workflow-step-pill pending" title="Step 3: ML Inference">3</div>
+          <div class="workflow-step-pill pending" title="Step 4: Risk Stratification">4</div>
+          <div class="workflow-step-pill pending" title="Step 5: Completion">5</div>
+        </div>
+
+        <!-- Progress Bar Track -->
+        <div class="consensus-bar-track" style="height:6px; max-width:320px; margin:0 auto 16px auto;">
+          <div class="consensus-bar-fill" id="workflow-progress-bar" style="width:20%; background:var(--accent-cyan);"></div>
+        </div>
+
+        <div style="font-size:0.75rem; color:var(--text-muted); font-family:var(--font-mono);">
+          CALIBRATING AGAINST 7 CLASSIFIERS
+        </div>
+      </div>
+    </div>
+
+    <!-- ==========================================================================
+         Model Inspection Modal
+         ========================================================================== -->
+    <div class="modal-backdrop" id="model-modal" role="dialog" aria-modal="true" aria-labelledby="modal-title">
+      <div class="modal-window">
+        <div class="modal-header">
+          <h3 id="modal-title" style="font-size: 1.15rem; font-weight:800; color:var(--text-primary);">
+            Model Specifications
+          </h3>
+          <button type="button" class="modal-close-btn" id="modal-close-btn" aria-label="Close dialog">
+            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <line x1="18" y1="6" x2="6" y2="18"></line>
+              <line x1="6" y1="6" x2="18" y2="18"></line>
+            </svg>
+          </button>
+        </div>
+        <div class="modal-body" id="modal-body">
+          <!-- Content populated dynamically -->
+        </div>
+      </div>
+    </div>
+
+    <!-- Validation Error Toast -->
+    <div class="validation-toast" id="validation-toast" role="alert"></div>
+
+    <!-- ==========================================================================
+         Footer
+         ========================================================================== -->
+    <footer class="footer">
+      <div class="container">
+        <div class="footer-top">
+          <div class="footer-about">
+            <div class="logo-group" style="margin-bottom: 14px;">
+              <div class="logo-mark" style="width:34px; height:34px;">
+                <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+                  <path d="M19 14c1.49-1.46 3-3.21 3-5.5A5.5 5.5 0 0 0 16.5 3c-1.76 0-3 .5-4.5 2-1.5-1.5-2.74-2-4.5-2A5.5 5.5 0 0 0 2 8.5c0 2.3 1.5 4.05 3 5.5l7 7Z"/>
+                </svg>
+              </div>
+              <strong style="font-size: 1.05rem;">HEARTINTEL</strong>
+            </div>
+            <p style="font-size: 0.8rem; color: var(--text-secondary); line-height: 1.6;">
+              Portfolio-grade cardiac risk prediction and multi-algorithm intelligence platform built from the Cleveland Clinic Heart Disease machine learning study.
+            </p>
+          </div>
+
+          <div>
+            <div class="footer-headline">Platform Navigation</div>
+            <ul class="footer-links">
+              <li><a href="#overview" class="footer-link">Executive Overview</a></li>
+              <li><a href="#screen-patient" class="footer-link">Screen Patient</a></li>
+              <li><a href="#patient-intelligence" class="footer-link">Patient Intelligence</a></li>
+              <li><a href="#model-intelligence" class="footer-link">Model Intelligence</a></li>
+            </ul>
+          </div>
+
+          <div>
+            <div class="footer-headline">Data &amp; Science</div>
+            <ul class="footer-links">
+              <li><a href="#model-evaluation" class="footer-link">Evaluation &amp; ROC</a></li>
+              <li><a href="#data-explorer" class="footer-link">Cohort Exploratory Data</a></li>
+              <li><a href="#hospital-insights" class="footer-link">Hospital Insights</a></li>
+              <li><a href="#methodology" class="footer-link">12-Step Methodology</a></li>
+            </ul>
+          </div>
+
+          <div>
+            <div class="footer-headline">Tech Stack Constraint</div>
+            <ul class="footer-links">
+              <li><span class="footer-link" style="color:var(--text-muted);">&bull; Semantic HTML5</span></li>
+              <li><span class="footer-link" style="color:var(--text-muted);">&bull; Pure Custom CSS3</span></li>
+              <li><span class="footer-link" style="color:var(--text-muted);">&bull; Vanilla JavaScript ES6+</span></li>
+              <li><span class="footer-link" style="color:var(--text-muted);">&bull; Zero External Frameworks</span></li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="clinical-notice-box">
+          <strong style="color:var(--text-primary);">Clinical Decision Support Disclaimer:</strong>
+          HEARTINTEL is an educational and portfolio demonstration system illustrating machine learning algorithms applied to cardiac clinical benchmarks. It does not replace professional clinical diagnosis, physician consultation, or official emergency medical triage.
+        </div>
+
+        <div class="footer-bottom">
+          <span>&copy; 2026 HEARTINTEL. Machine Learning for Earlier Cardiac Risk Screening.</span>
+          <span>Source: PRCP-1016 Heart Disease Prediction Study.</span>
+        </div>
+      </div>
+    </footer>
+
+    <!-- Modular Vanilla Script -->
+    <script type="module" src="/js/main.js"></script>
   </body>
 </html>

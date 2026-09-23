@@ -1,6 +1,6 @@
 {
-  "name": "CardioPredict AI - Heart Disease ML Diagnostic System",
-  "description": "Interactive cardiovascular disease risk prediction system powered by trained machine learning classification algorithms (Random Forest, Extra Trees, Gradient Boosting, Logistic Regression, SVM, KNN, Decision Tree) with patient screening, feature importance analysis, EDA metrics, and clinical guidance.",
+  "name": "HEARTINTEL - AI-Powered Cardiac Risk Intelligence",
+  "description": "Premium healthcare machine learning web platform exploring patient clinical data, exploratory data analysis, and 7 ML classification algorithms for earlier cardiac risk screening.",
   "permissions": [],
   "capabilities": [
     "MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"
