@@ -1,0 +1,8 @@
+{
+  "name": "CardioPredict AI - Heart Disease ML Diagnostic System",
+  "description": "Interactive cardiovascular disease risk prediction system powered by trained machine learning classification algorithms (Random Forest, Extra Trees, Gradient Boosting, Logistic Regression, SVM, KNN, Decision Tree) with patient screening, feature importance analysis, EDA metrics, and clinical guidance.",
+  "permissions": [],
+  "capabilities": [
+    "MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"
+  ]
+}
