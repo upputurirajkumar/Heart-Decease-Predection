@@ -171,56 +171,67 @@ The `predictionService.js` class is intentionally structured with a clean asynch
 
 ---
 
-## 13. How to Run Locally
+## 13. Running Locally
 
-### Option A: Modern Node.js / Vite (Recommended)
 ```bash
-# Clone the repository
-git clone https://github.com/your-username/heartintel-cardiac-risk-ml.git
-cd heartintel-cardiac-risk-ml
+# Clone repository
+git clone https://github.com/USERNAME/Heart-Decease-Predection.git
+cd Heart-Decease-Predection
 
-# Install dependencies (Vite dev server)
+# Install dependencies (Vite dev environment)
 npm install
 
-# Start local development server
+# Start local development server on port 3000
 npm run dev
 
 # Open your browser at http://localhost:3000
 ```
 
-### Option B: Pure Static File Server (Zero Dependencies)
-Because HEARTINTEL uses standard ES modules and native web APIs, it can be served using any static web server:
+## 14. Production Build & Preview
+
 ```bash
-# Python 3
-python -m http.server 3000
+# Compile and bundle static assets into /dist
+npm run build
 
-# or PHP
-php -S localhost:3000
-
-# or npx serve
-npx serve .
+# Preview production build locally
+npm run preview
 ```
 
 ---
 
-## 14. Deployment Instructions
+## 15. Deployment Instructions
 
-### GitHub Pages (Static Hosting)
-1. Push the repository to GitHub.
+### GitHub Pages (Automated via GitHub Actions)
+The repository includes a production-ready GitHub Actions workflow at `.github/workflows/deploy.yml` configured with relative base asset resolution (`base: './'`).
+
+1. Push the code to your GitHub repository (e.g. `main` branch):
+   ```bash
+   git add .
+   git commit -m "Deploy HEARTINTEL"
+   git push origin main
+   ```
 2. In your GitHub repository, navigate to **Settings** > **Pages**.
-3. Under **Build and deployment**, select **Source: Deploy from a branch**.
-4. Select `main` branch and `/ (root)` folder, then click **Save**.
-5. Your application will be live at `https://<username>.github.io/<repo-name>/`.
+3. Under **Build and deployment** > **Source**, select **GitHub Actions**.
+4. The workflow will automatically trigger, install dependencies, run `npm run build`, and deploy the `dist` bundle.
+5. Your application will be live at:
+   ```text
+   https://<USERNAME>.github.io/<REPO_NAME>/
+   # Example: https://rajkumarupputuri.github.io/Heart-Decease-Predection/
+   ```
 
-### Cloudflare Pages / Vercel / Netlify
-1. Connect your GitHub repository.
-2. Build Command: `npm run build` (or leave empty for static).
-3. Output Directory: `dist` (if building with Vite) or `.` (root).
-4. Deploy with one click.
+### Vercel Deployment
+1. Log in to [Vercel](https://vercel.com) and click **Add New Project**.
+2. Import your GitHub repository.
+3. Configure project settings:
+   - **Framework Preset**: `Vite`
+   - **Build Command**: `npm run build`
+   - **Output Directory**: `dist`
+   - **Install Command**: `npm install`
+4. Click **Deploy**. Vercel will build and assign an instant production URL with automatic HTTPS and edge caching.
 
 ---
 
-## 15. Future Scope
+## 16. Future Scope
 1. **Multi-Center Federated Cohort Integration:** Expanding training data across Hungarian, Swiss, and Long Beach VA cardiology cohorts to evaluate cross-institutional generalizability.
 2. **DICOM & 12-Lead ECG Signal Ingestion:** Integrating raw waveform signal processing (1D Convolutional Neural Networks) directly from digital ECG leads alongside tabular biomarkers.
 3. **FHIR / HL7 EHR Integration:** Developing SMART-on-FHIR connectors for seamless interoperability with Epic and Cerner electronic health record systems.
